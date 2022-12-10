@@ -7,6 +7,12 @@ fn unique(list: Vec<i32>) -> Vec<i32> {
     output_list
 }
 
+fn unique_generic<T:Ord>(mut list: Vec<T>) -> Vec<T> {
+    list.sort();
+    list.dedup();
+    list
+}
+
 
 
 fn main() {
@@ -22,12 +28,27 @@ fn empty_list() {
     let actual_output = unique(input);
     assert_eq!(expected_output, actual_output);
 }
+#[test]
+fn empty_list_generic() { 
+    let input = vec![];
+    let expected_output: Vec<i32> = vec![];
+    let actual_output = unique_generic(input);
+    assert_eq!(expected_output, actual_output);
+}
 
 #[test]
 fn sorted_list() {
     let input = vec![1, 4, 5];
     let expected_output = vec![1, 4, 5];
     let actual_output = unique(input);
+    assert_eq!(actual_output, expected_output);
+}
+
+#[test]
+fn sorted_list_generic() {
+    let input = vec![1, 4, 5];
+    let expected_output = vec![1, 4, 5];
+    let actual_output = unique_generic(input);
     assert_eq!(actual_output, expected_output);
 }
 
@@ -48,11 +69,29 @@ fn unsorted_list_with_duplicates() {
 }
 
 #[test]
+fn unsorted_list_with_duplicates_generic() {
+    let input = vec![1, 5, 5, 2, 2];
+    let expected_output = vec![1, 2, 5];
+    let actual_output = unique_generic(input);
+    assert_eq!(actual_output, expected_output);
+}
+
+#[test]
 fn sorted_list_with_duplicates() {
     // the mut keyword can be used to create mutable variables, meaning the value assigned to them can be changed more than once
     let mut input = vec![1, 5, 5, 2, 2];
     input.sort_by(|a, b| a.partial_cmp(b).unwrap());
     let expected_output = vec![1, 2, 5];
     let actual_output = unique(input);
+    assert_eq!(actual_output, expected_output);
+}
+
+#[test]
+fn sorted_list_with_duplicates_generic() {
+    // the mut keyword can be used to create mutable variables, meaning the value assigned to them can be changed more than once
+    let mut input = vec![1, 5, 5, 2, 2];
+    input.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    let expected_output = vec![1, 2, 5];
+    let actual_output = unique_generic(input);
     assert_eq!(actual_output, expected_output);
 }
