@@ -8,6 +8,11 @@ fn info_v2<T: std::fmt::Display>(text: &T) {
     println!("{}", text);
 }
 
+fn info_v3<T: ToString>(a: &T) {
+    println!("{}", a.to_string());
+}
+
+
 fn main() {
     let a = "?";
     let b = "?".to_string();
@@ -15,6 +20,7 @@ fn main() {
     info(&a);
     info(&b);
     info_v2(&a);
+    info_v3(&a);
 }
 
 #[test]
