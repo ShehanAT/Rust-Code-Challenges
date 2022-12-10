@@ -1,24 +1,32 @@
-const list = vec![1.0, 4.0, 5.0];
-assert_eq!(median(list), None);
-
-fn median(list: Vec<f32>) -> Option<f32> {
-    if list.is_empty(){
-        return None;
-    }
-
-    // if alloc::slice 
-    //     pub fn sort(&mut self)
+fn median(mut b: Vec<f32>) -> Option<f32> {
+        if b.is_empty(){
+            return None;
+        }
 
 
-    list.sort();
-    let mid = list.len() / 2;
-    let med = if list.len() % 2 == 0 {
-        // even number 
-        (list[mid - 1] + list[mid]) / 2.0;
-    }else{
-        // odd number
-        list[mid];
-    };
+        b.sort_by(|x, y| x.partial_cmp(y).unwrap());
 
-    Some(med);
+        let n_elements = b.len();
+        let mid = n_elements / 2;
+
+
+        let med = if n_elements % 2 == 0 {
+            // even number 
+            (b[mid] + b[mid - 1]) / 2.0
+        } else {
+            // odd number
+            b[mid]
+        };
+
+        Some(med)
 }
+
+
+fn main() {
+    let answer = median(vec![1.0, 2.0, 5.0, 7.0, 9.0, 11.0]);
+
+    println!("median([1,2,5,7,9,11]) = {:?}", answer);
+}
+
+
+
