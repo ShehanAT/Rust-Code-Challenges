@@ -26,20 +26,27 @@ impl Temperature {
     }
 
     fn to_celsius(&self) -> f32 {
-        if(Temperature::type_of(self.scale).eq("Celsius")){
-            self.degrees
-        } else{
-            let degrees_in_f = self.degrees;
-            let degrees_in_c: f32 = (degrees_in_f - 32.0) * 5.0/9.0;
-            degrees_in_c
-        }
+        match self.scale {
+            Scale::Celsius => self.degrees,
+            Scale::Fahrenheit => {
+                let degrees_in_f = self.degrees;
+                let degrees_in_c: f32 = (degrees_in_f - 32.0) * 5.0/9.0;
+                degrees_in_c
+            }
+        }   
     }
 
     fn to_fahrenheit(&self) -> f32 {
-
-        let degrees_in_c = self.degrees;
-        let degrees_in_f = (degrees_in_c * 9.0/5.0) + 32.0;
-        degrees_in_f
+        match self.scale {
+            Scale::Celsius => {
+                let degrees_in_c = self.degrees;
+                let degrees_in_f = (degrees_in_c * 9.0/5.0) + 32.0;
+                // self.scale = Scale::Fahrenheit;
+                degrees_in_f
+                
+            },
+            Scale::Fahrenheit => self.degrees,
+        }
     }
 }
 
@@ -54,5 +61,6 @@ fn main() {
 fn one_degree() {
     let cold = Temperature::new(1.0);
     assert!((cold.to_fahrenheit() - 33.8) < 0.01);
-    assert!((cold.to_fahrenheit() - 33.8) == 1.0);
+    println!("{:}", (cold.to_fahrenheit()));
+    assert!((cold.to_fahrenheit() - 32.8) == 1.0);
 }
