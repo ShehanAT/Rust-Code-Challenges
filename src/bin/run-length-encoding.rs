@@ -18,7 +18,9 @@ mod run_length_encoding {
             counter = counter + 1;
             prev = Some(c);
         }
-        encoding_arr.push_str(&format!("{}{}", counter, prev.unwrap()));
+        if prev.is_some() {
+            encoding_arr.push_str(&format!("{}{}", counter, prev.unwrap()));
+        }
         encoding_arr        
     }
 
@@ -49,6 +51,20 @@ mod run_length_encoding {
 
         decoded_str
     }
+
+    // pub fn decode(text: &str) -> String {
+    //     let mut decoded = String::with_capacity(text.len() * 2);
+    //     let mut char: Char = text.chars();
+
+    //     while let (Some(n_raw), Some(c)) = (chars.next(), chars.next()) {
+    //         let n = n_raw.to_digit(10).unwrap();
+    //         for _ in 0..n {
+    //             decoded.push(c);
+    //         }
+    //     }
+
+    //     decoded
+    // }
 
 }
 
