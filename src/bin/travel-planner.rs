@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::{collections::{HashMap, HashSet, BinaryHeap}, cmp::Ordering};
 
 type Node = usize;
 type Cost = usize;
@@ -32,7 +32,27 @@ impl Graph {
     }
 }
 
+#[derive(PartialEq, Eq, PartialOrd)]
+struct Step {
+    cost: Cost,
+    node: Node,
+    history: Vec<Node>,
+}
+
+impl Ord for Step { // implementing the Ord trait makes Step comparable to other Step instances
+
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.cost.cmp(&other.cost)
+    }
+
+}
+
+
 fn shortest_path(g: &Graph, start: Node, goal: Node) -> Option<(Vec<Node>, Cost)> {
+    // Need to implement an algorithm similar to Dijkstra shortest path algorithm
+    
+    let mut to_visit = BinaryHeap::new();
+
     todo!()
 }
 
