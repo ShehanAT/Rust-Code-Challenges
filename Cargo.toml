@@ -15,3 +15,4 @@ opt-level = 3
 chrono = "0.4.23"
 tempfile = "3"
 ciphers = "0.1.0"
+sycamore = "0.8.1"
