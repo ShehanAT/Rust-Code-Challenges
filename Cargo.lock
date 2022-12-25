@@ -57,6 +57,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "ciphers"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b001d2f53009135648d4f38656955fbbd0992144bee2c82c7f6c49786ec7f4e"
+
+[[package]]
 name = "codespan-reporting"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -257,6 +263,7 @@ name = "rust-code-challenges"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "ciphers",
  "tempfile",
 ]
 
